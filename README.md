@@ -54,14 +54,13 @@ cp .env.example .env
    pip install -r requirements.txt
    ```
 3. **Set environment variables**
-   - `OPENAI_API_KEY` (for OpenAI)
-   - `API_KEY` (for your API authentication, default: `test-api-key`)
-   - (Optional for Azure) `AZURE_OPENAI_ENDPOINT`, `AZURE_OPENAI_KEY`, `AZURE_OPENAI_DEPLOYMENT`, etc.
-   - Example (Windows):
-     ```cmd
-     set OPENAI_API_KEY=your-key-here
-     set API_KEY=your-api-key
+   - Please use the `.env` file for all environment variables. Copy `.env.example` to `.env` and fill in your keys:
+     ```bash
+     cp .env.example .env
+     # Then edit .env with your preferred editor
      ```
+   - The app will automatically load variables from `.env` if present.
+   - (Manual setting of environment variables is not required unless you have a special use case.)
 4. **Run the API
    - For development/debugging (with Uvicorn):
      ```bash
@@ -89,7 +88,7 @@ cp .env.example .env
     5. Click Send to upload.
   - **FastAPI Docs:**
     1. Open `http://localhost:8000/docs` in your browser.
-    2. Click `Authorize` (top right) and enter `Bearer test-api-key`.
+    2. Click `Authorize` (top right) and enter `test-api-key` (no need to type 'Bearer ').
     3. Expand the `/upload` endpoint, click `Try it out`.
     4. Click `Choose File` and select your business JSON or CSV file.
     5. Click Execute to upload.
@@ -111,7 +110,7 @@ cp .env.example .env
     4. Click Send and kindly view the response.
   - **FastAPI Docs:**
     1. Open `http://localhost:8000/docs` in your browser.
-    2. Click `Authorize` and enter `Bearer test-api-key`.
+    2. Click `Authorize` and enter `test-api-key` (no need to type 'Bearer ').
     3. Expand the `/query` endpoint, click `Try it out`, fill in the session ID and query, then execute.
 
 ### 3. Get Chat History
@@ -124,7 +123,7 @@ cp .env.example .env
     3. Click Send to kindly retrieve the chat history for the session.
   - **FastAPI Docs:**
     1. Open `http://localhost:8000/docs`.
-    2. Click `Authorize` and enter `Bearer test-api-key`.
+    2. Click `Authorize` and enter `test-api-key` (no need to type 'Bearer ').
     3. Expand the `/history` endpoint, click `Try it out`, enter the session ID, and execute.
 
 > **Reminder:** The default API key is `test-api-key`. Please update your `.env` if you wish to use a different key. Always upload your business data before querying or retrieving chat history.
