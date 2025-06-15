@@ -128,6 +128,18 @@ cp .env.example .env
 
 > **Reminder:** The default API key is `test-api-key`. Please update your `.env` if you wish to use a different key. Always upload your business data before querying or retrieving chat history.
 
+## Running Tests
+
+This project uses `pytest` for automated testing. Tests are located in the `src/tests/` directory and cover core API endpoints and logic.
+
+To run all tests, please ensure your environment is activated and dependencies are installed, then run:
+
+```bash
+pytest
+```
+
+You should see output indicating the number of tests run and their results. This helps ensure your installation and code changes are working as expected.
+
 ## File Structure
 - `data/business.json` - Example business dataset
 - `data/chat_history.json` - Persistent chat history
