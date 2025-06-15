@@ -14,7 +14,12 @@ Business Lookup Assistant is a Retrieval-Augmented Generation (RAG) API that use
 - Dockerfile and tests included
 
 ## Setup Instructions
-0. **Create a Python environment (recommended)**
+0. **Clone the repository**
+   ```bash
+   git clone https://github.com/Rhed-Dev/business-lookup.git
+   cd business-lookup
+   ```
+1. **Create a Python environment (recommended)**
    - Using Conda:
      ```bash
      conda create -n business-lookup python=3.11
@@ -28,11 +33,11 @@ Business Lookup Assistant is a Retrieval-Augmented Generation (RAG) API that use
      ```
    - Or use VS Code's built-in environment manager.
 
-1. **Clone the repo & install dependencies**
+2. **Install dependencies**
    ```bash
    pip install -r requirements.txt
    ```
-2. **Set environment variables**
+3. **Set environment variables**
    - `OPENAI_API_KEY` (for OpenAI)
    - `API_KEY` (for your API authentication, default: `test-api-key`)
    - (Optional for Azure) `AZURE_OPENAI_ENDPOINT`, `AZURE_OPENAI_KEY`, `AZURE_OPENAI_DEPLOYMENT`, etc.
@@ -41,7 +46,7 @@ Business Lookup Assistant is a Retrieval-Augmented Generation (RAG) API that use
      set OPENAI_API_KEY=your-key-here
      set API_KEY=your-api-key
      ```
-3. **Run the API
+4. **Run the API
    - For development/debugging (with Uvicorn):
      ```bash
      uvicorn src.main:app --reload
@@ -51,7 +56,7 @@ Business Lookup Assistant is a Retrieval-Augmented Generation (RAG) API that use
      docker build -t business-lookup .
      docker run -p 8000:8000 --env-file .env business-lookup
      ```
-4. **Query the API**
+5. **Query the API**
    - POST `/query?session_id=123` with `{ "query": "Find vegan cafes near Bondi" }` and header `Authorization: Bearer <API_KEY>`
    - GET `/history?session_id=123` to retrieve chat history
    - POST `/upload` with a JSON or CSV file to update data
