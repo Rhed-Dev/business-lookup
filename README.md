@@ -83,7 +83,7 @@ cp .env.example .env
 - **Instructions:**
   - **Postman:**
     1. Set the method to POST and the URL to `http://localhost:8000/upload`.
-    2. In Headers, add `Authorization: Bearer test-api-key`.
+    2. Go to the Authorization tab, select `Bearer Token`, and enter `test-api-key` (or your custom key).
     3. In Body, select `form-data`.
     4. Add a key named `file`, set type to `File`, and upload your business JSON or CSV file.
     5. Click Send to upload.
@@ -99,15 +99,15 @@ cp .env.example .env
 ### 2. Query Businesses
 - Endpoint: `POST /query?session_id=YOUR_SESSION_ID`
 - **Authorization:** Kindly set the `Authorization` header to `Bearer test-api-key` (or your custom API key).
-- **Body:**
+- **Body (sample query):**
   ```json
   { "query": "Find vegan cafes near Bondi" }
   ```
 - **How to test:**
   - **Postman:**
     1. Set the method to POST and the URL to `http://localhost:8000/query?session_id=test123`.
-    2. In Headers, add `Authorization: Bearer test-api-key`.
-    3. In Body, select `raw` and `JSON`, then enter your query JSON.
+    2. Go to the Authorization tab, select `Bearer Token`, and enter `test-api-key` (or your custom key).
+    3. In Body, select `raw` and `JSON`, then enter your query JSON (see sample above).
     4. Click Send and kindly view the response.
   - **FastAPI Docs:**
     1. Open `http://localhost:8000/docs` in your browser.
@@ -120,7 +120,7 @@ cp .env.example .env
 - **How to test:**
   - **Postman:**
     1. Set the method to GET and the URL to `http://localhost:8000/history?session_id=test123`.
-    2. In Headers, add `Authorization: Bearer test-api-key`.
+    2. Go to the Authorization tab, select `Bearer Token`, and enter `test-api-key` (or your custom key).
     3. Click Send to kindly retrieve the chat history for the session.
   - **FastAPI Docs:**
     1. Open `http://localhost:8000/docs`.
