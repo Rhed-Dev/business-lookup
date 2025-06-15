@@ -13,6 +13,22 @@ Business Lookup Assistant is a Retrieval-Augmented Generation (RAG) API that use
 - Persistent chat history (JSON file)
 - Dockerfile and tests included
 
+## Environment Variables & .env Setup
+
+You can use a `.env` file to manage your environment variables. Copy the provided `.env.example` to `.env` and fill in your keys:
+
+```bash
+cp .env.example .env
+```
+
+**.env variables:**
+- `OPENAI_API_KEY` (required for OpenAI)
+- `API_KEY` (required for API authentication) - use you may use default value 'test-api-key'
+- `AZURE_OPENAI_ENDPOINT`, `AZURE_OPENAI_KEY`, `AZURE_OPENAI_DEPLOYMENT`, etc. (optional, for Azure OpenAI)
+- `DATA_PATH`, `EMBEDDING_MODEL`, `COMPLETIONS_MODEL` (optional overrides)
+
+> The app will automatically load variables from `.env` if present.
+
 ## Setup Instructions
 0. **Clone the repository**
    ```bash
@@ -56,26 +72,47 @@ Business Lookup Assistant is a Retrieval-Augmented Generation (RAG) API that use
      docker build -t business-lookup .
      docker run -p 8000:8000 --env-file .env business-lookup
      ```
-5. **Query the API**
-   - POST `/query?session_id=123` with `{ "query": "Find vegan cafes near Bondi" }` and header `Authorization: Bearer <API_KEY>`
-   - GET `/history?session_id=123` to retrieve chat history
-   - POST `/upload` with a JSON or CSV file to update data
 
-## Environment Variables & .env Setup
+## How to Use the API
 
-You can use a `.env` file to manage your environment variables. Copy the provided `.env.example` to `.env` and fill in your keys:
+### 1. Upload Data (Required Before Querying)
+- Endpoint: `POST /upload`
+- In Postman or API docs, please select `form-data` and upload your business JSON or CSV file as the `file` field.
+- **Authorization:** Kindly set the `Authorization` header to `Bearer <API_KEY>`.
+- Please ensure you upload your data before making any queries.
 
-```bash
-cp .env.example .env
-```
+### 2. Query Businesses
+- Endpoint: `POST /query?session_id=YOUR_SESSION_ID`
+- **Authorization:** Kindly set the `Authorization` header to `Bearer <API_KEY>`.
+- **Body:**
+  ```json
+  { "query": "Find vegan cafes near Bondi" }
+  ```
+- **How to test:**
+  - **Postman:**
+    1. Please set the method to POST and the URL to `http://localhost:8000/query?session_id=test123`.
+    2. In Headers, add `Authorization: Bearer <API_KEY>`.
+    3. In Body, select `raw` and `JSON`, then enter your query JSON.
+    4. Send the request and kindly view the response.
+  - **API Docs:**
+    1. Open `http://localhost:8000/docs` in your browser.
+    2. Click `Authorize` (top right) and enter your API key as a Bearer token.
+    3. Expand the `/query` endpoint, click `Try it out`, fill in the session ID and query, then execute.
 
-**.env variables:**
-- `OPENAI_API_KEY` (required for OpenAI)
-- `API_KEY` (required for API authentication) - use you may use default value 'test-api-key'
-- `AZURE_OPENAI_ENDPOINT`, `AZURE_OPENAI_KEY`, `AZURE_OPENAI_DEPLOYMENT`, etc. (optional, for Azure OpenAI)
-- `DATA_PATH`, `EMBEDDING_MODEL`, `COMPLETIONS_MODEL` (optional overrides)
+### 3. Get Chat History
+- Endpoint: `GET /history?session_id=YOUR_SESSION_ID`
+- **Authorization:** Kindly set the `Authorization` header to `Bearer <API_KEY>`.
+- **How to test:**
+  - **Postman:**
+    1. Please set the method to GET and the URL to `http://localhost:8000/history?session_id=test123`.
+    2. In Headers, add `Authorization: Bearer <API_KEY>`.
+    3. Send the request to kindly retrieve the chat history for the session.
+  - **API Docs:**
+    1. Open `http://localhost:8000/docs`.
+    2. Click `Authorize` and enter your API key as a Bearer token.
+    3. Expand the `/history` endpoint, click `Try it out`, enter the session ID, and execute.
 
-> The app will automatically load variables from `.env` if present.
+> **Note:** All endpoints require the `Authorization: Bearer <API_KEY>` header. Kindly upload your business data before querying or retrieving chat history.
 
 ## File Structure
 - `data/business.json` - Example business dataset
