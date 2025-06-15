@@ -6,6 +6,12 @@ from typing import List, Dict
 CHAT_HISTORY_FILE = "data/chat_history.json"
 CHAT_HISTORY_LOCK = threading.Lock()
 
+# Initialize chat_history.json if it does not exist
+if not os.path.exists(CHAT_HISTORY_FILE):
+    os.makedirs(os.path.dirname(CHAT_HISTORY_FILE), exist_ok=True)
+    with open(CHAT_HISTORY_FILE, "w", encoding="utf-8") as f:
+        json.dump({}, f, ensure_ascii=False, indent=2)
+
 def save_message(session_id: str, message: Dict):
     """
     Save a message to the chat history for a given session.
