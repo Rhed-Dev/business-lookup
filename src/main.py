@@ -41,6 +41,8 @@ def query_business(request: QueryRequest, session_id: str = Query(...)):
         # Save to chat history
         save_message(session_id, {"role": "user", "content": request.query})
         save_message(session_id, {"role": "assistant", "content": response})
+        if followup:
+            save_message(session_id, {"role": "assistant", "content": followup})
         return QueryResponse(response=response, top_results=top_results, followup=followup)
     except Exception as e:
         logger.error(f"Error: {e}")
