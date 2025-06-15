@@ -1,0 +1,23 @@
+# Ignore Python cache and compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore environment files
+.env
+.env.*
+
+# Ignore data and embeddings
+/data/
+/embeddings/
+
+# Ignore test and coverage outputs
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Ignore editor and OS files
+.vscode/
+.idea/
+.DS_Store

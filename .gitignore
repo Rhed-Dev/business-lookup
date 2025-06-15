@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.so
+*.egg
+*.egg-info/
+build/
+dist/
+.eggs/
+*.log
+*.sqlite3
+*.db
+*.DS_Store
+.env
+.env.*
+.vscode/
+.idea/
+*.swp
+*.bak
+*.tmp
+*.old
+*.orig
+*.pid
+*.coverage
+htmlcov/
+.cache/
+.mypy_cache/
+.pytest_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# VSCode
+.history/
+
+# Data
+/data/chat_history.json
+/embeddings/*.pkl
+/embeddings/*.npy
