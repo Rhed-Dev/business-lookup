@@ -75,44 +75,59 @@ cp .env.example .env
 
 ## How to Use the API
 
+> **Important:** All endpoints require Bearer token authentication. By default, the API key is `test-api-key` (as set in your `.env` or environment variables). Please use this value unless you have changed it.
+
 ### 1. Upload Data (Required Before Querying)
 - Endpoint: `POST /upload`
-- In Postman or API docs, please select `form-data` and upload your business JSON or CSV file as the `file` field.
-- **Authorization:** Kindly set the `Authorization` header to `Bearer <API_KEY>`.
-- Please ensure you upload your data before making any queries.
+- **Authorization:** Kindly set the `Authorization` header to `Bearer test-api-key` (or your custom API key).
+- **Instructions:**
+  - **Postman:**
+    1. Set the method to POST and the URL to `http://localhost:8000/upload`.
+    2. In Headers, add `Authorization: Bearer test-api-key`.
+    3. In Body, select `form-data`.
+    4. Add a key named `file`, set type to `File`, and upload your business JSON or CSV file.
+    5. Click Send to upload.
+  - **FastAPI Docs:**
+    1. Open `http://localhost:8000/docs` in your browser.
+    2. Click `Authorize` (top right) and enter `Bearer test-api-key`.
+    3. Expand the `/upload` endpoint, click `Try it out`.
+    4. Click `Choose File` and select your business JSON or CSV file.
+    5. Click Execute to upload.
+- **Note:** Mock business data is already provided for you in `data/business.json`. You may use this file for your initial upload or testing.
+- Please ensure you upload data before making any queries.
 
 ### 2. Query Businesses
 - Endpoint: `POST /query?session_id=YOUR_SESSION_ID`
-- **Authorization:** Kindly set the `Authorization` header to `Bearer <API_KEY>`.
+- **Authorization:** Kindly set the `Authorization` header to `Bearer test-api-key` (or your custom API key).
 - **Body:**
   ```json
   { "query": "Find vegan cafes near Bondi" }
   ```
 - **How to test:**
   - **Postman:**
-    1. Please set the method to POST and the URL to `http://localhost:8000/query?session_id=test123`.
-    2. In Headers, add `Authorization: Bearer <API_KEY>`.
+    1. Set the method to POST and the URL to `http://localhost:8000/query?session_id=test123`.
+    2. In Headers, add `Authorization: Bearer test-api-key`.
     3. In Body, select `raw` and `JSON`, then enter your query JSON.
-    4. Send the request and kindly view the response.
-  - **API Docs:**
+    4. Click Send and kindly view the response.
+  - **FastAPI Docs:**
     1. Open `http://localhost:8000/docs` in your browser.
-    2. Click `Authorize` (top right) and enter your API key as a Bearer token.
+    2. Click `Authorize` and enter `Bearer test-api-key`.
     3. Expand the `/query` endpoint, click `Try it out`, fill in the session ID and query, then execute.
 
 ### 3. Get Chat History
 - Endpoint: `GET /history?session_id=YOUR_SESSION_ID`
-- **Authorization:** Kindly set the `Authorization` header to `Bearer <API_KEY>`.
+- **Authorization:** Kindly set the `Authorization` header to `Bearer test-api-key` (or your custom API key).
 - **How to test:**
   - **Postman:**
-    1. Please set the method to GET and the URL to `http://localhost:8000/history?session_id=test123`.
-    2. In Headers, add `Authorization: Bearer <API_KEY>`.
-    3. Send the request to kindly retrieve the chat history for the session.
-  - **API Docs:**
+    1. Set the method to GET and the URL to `http://localhost:8000/history?session_id=test123`.
+    2. In Headers, add `Authorization: Bearer test-api-key`.
+    3. Click Send to kindly retrieve the chat history for the session.
+  - **FastAPI Docs:**
     1. Open `http://localhost:8000/docs`.
-    2. Click `Authorize` and enter your API key as a Bearer token.
+    2. Click `Authorize` and enter `Bearer test-api-key`.
     3. Expand the `/history` endpoint, click `Try it out`, enter the session ID, and execute.
 
-> **Note:** All endpoints require the `Authorization: Bearer <API_KEY>` header. Kindly upload your business data before querying or retrieving chat history.
+> **Reminder:** The default API key is `test-api-key`. Please update your `.env` if you wish to use a different key. Always upload your business data before querying or retrieving chat history.
 
 ## File Structure
 - `data/business.json` - Example business dataset
